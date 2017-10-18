@@ -3,6 +3,8 @@ package controller;
 import java.net.UnknownHostException;
 import java.security.NoSuchAlgorithmException;
 
+import com.vaadin.server.VaadinSession;
+
 import model.Encode;
 import model.User;
 
@@ -14,7 +16,7 @@ public class Authentication {
 	private Authentication() {
 	}
 	
-	public Authentication getInstance() {
+	protected static Authentication getInstance() {
 		if (AUTH == null) {
 			AUTH = new Authentication();
 		}
@@ -31,8 +33,6 @@ public class Authentication {
 	
 	public Boolean authenticate(String userID, String psw){
 		
-		//TODO
-		//if psw is not encoded yet
 		try {
 			psw = Encode.cryptingString(psw);
 		} catch (NoSuchAlgorithmException e1) {
@@ -42,7 +42,6 @@ public class Authentication {
 		
 		if(dao.UserDAO.isUserInDatabase(userID)) {//Account found
 			
-			//TODO
 			//UnknownHostException because in the user there is the cart
 			//and in the cart there are products with the IP address of who added it
 			try {
@@ -56,6 +55,7 @@ public class Authentication {
 			if(Authentication.USER != null) { //if user is authenticated, do login
 				//TODO
 				System.out.println("Can login.");
+				VaadinSession.getCurrent().setAttribute("user", USER);
 				return true;
 			}
 			else {
@@ -70,6 +70,10 @@ public class Authentication {
 		
 		return false;
 		
+	}
+	
+	public void doLogout() {
+		USER = null;
 	}
 
 }
