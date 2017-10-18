@@ -70,12 +70,15 @@ public class LoginView extends VerticalLayout implements View {
         loginPanel.addStyleName("login-panel");
 
         loginPanel.addComponent(buildLabels());
-        loginPanel.addComponent(buildFields());
-        loginPanel.addComponent(new CheckBox("Remember me", true));
+        loginPanel.addComponent(buildAuthentication());
+        
         return loginPanel;
     }
 
-    private Component buildFields() {
+    private Component buildAuthentication() {
+    	
+    	VerticalLayout authentication = new VerticalLayout();
+    	
         HorizontalLayout fields = new HorizontalLayout();
         fields.addStyleName("fields");
 
@@ -91,9 +94,24 @@ public class LoginView extends VerticalLayout implements View {
         signin.addStyleName(ValoTheme.BUTTON_PRIMARY);
         signin.setClickShortcut(KeyCode.ENTER);
         signin.focus();
-
+        
         fields.addComponents(username, password, signin);
         fields.setComponentAlignment(signin, Alignment.BOTTOM_LEFT);
+        
+        authentication.addComponent(fields);
+        
+        HorizontalLayout options = new HorizontalLayout();
+        CheckBox checkBox = new CheckBox("Remember me", true);
+        Button registerBtn = new Button("Not registered?");
+        registerBtn.addStyleName(ValoTheme.BUTTON_LINK);
+        options.addComponents(checkBox, registerBtn);
+        options.setComponentAlignment(checkBox, Alignment.MIDDLE_LEFT);
+        options.setExpandRatio(checkBox, 1);
+        options.setComponentAlignment(registerBtn, Alignment.BOTTOM_RIGHT);
+        
+        authentication.addComponent(options);
+        
+        options.setSizeFull();
 
         signin.addClickListener(new ClickListener() {
             @Override
@@ -106,7 +124,15 @@ public class LoginView extends VerticalLayout implements View {
             	}
             }
         });
-        return fields;
+        
+        registerBtn.addClickListener(new ClickListener() {
+            @Override
+            public void buttonClick(final ClickEvent event) {
+            	goToRegisterView();
+            }
+        });
+        
+        return authentication;
     }
 
     private Component buildLabels() {
@@ -131,6 +157,12 @@ public class LoginView extends VerticalLayout implements View {
 		Page.getCurrent().setTitle("zumzum.it");
     	UI.getCurrent().setContent(new MainView());
         removeStyleName("loginview");
-	}	
+	}
+	
+	private void goToRegisterView() {
+		Page.getCurrent().setTitle("zumzum.it");
+    	UI.getCurrent().setContent(new RegisterView());
+        removeStyleName("loginview");
+	}
 
 }
