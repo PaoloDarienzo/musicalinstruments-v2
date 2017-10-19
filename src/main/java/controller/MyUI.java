@@ -26,7 +26,7 @@ import view.MainView;
 @SuppressWarnings("serial")
 @Theme("mytheme")
 @Title("zumzum.it")
-public class HomeUI extends UI {
+public class MyUI extends UI {
 	
 	public static Authentication AUTH;
 
@@ -54,7 +54,6 @@ public class HomeUI extends UI {
         	Page.getCurrent().setTitle("zumzum.it");
             setContent(new MainView());
             removeStyleName("loginview");
-            //getNavigator().navigateTo(getNavigator().getState());
         } else {
         	Page.getCurrent().setTitle("zumzum.it - login");
             setContent(new LoginView());
@@ -71,7 +70,7 @@ public class HomeUI extends UI {
         updateContent();
     }
     
-    public void userLoggedOut(final UserLoggedOutEvent event) {
+    public void userLoggedOut() {
         // When the user logs out, current VaadinSession gets closed and the
         // page gets reloaded on the login screen. Do notice that this doesn't
         // invalidate the current HttpSession.
@@ -86,8 +85,17 @@ public class HomeUI extends UI {
     }
     */
     
-    @WebServlet(urlPatterns = "/*", name = "HomeUIServlet", asyncSupported = true)
-    @VaadinServletConfiguration(ui = HomeUI.class, productionMode = false)
-    public static class HomeUIServlet extends VaadinServlet {
+    public void userLoggedOut() {
+        // When the user logs out, current VaadinSession gets closed and the
+        // page gets reloaded on the login screen. Do notice that this doesn't
+        // invalidate the current HttpSession.
+    	AUTH.doLogout();
+        VaadinSession.getCurrent().close();
+        Page.getCurrent().reload();
+    }
+    
+    @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
+    @VaadinServletConfiguration(ui = MyUI.class, productionMode = false)
+    public static class MyUIServlet extends VaadinServlet {
     }
 }

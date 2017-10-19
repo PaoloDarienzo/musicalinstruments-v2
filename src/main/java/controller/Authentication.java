@@ -54,7 +54,7 @@ public class Authentication {
 			
 			if(Authentication.USER != null) { //if user is authenticated, do login
 				//TODO
-				System.out.println("Can login.");
+				System.out.println("User: " + USER.getMail() + " can login.");
 				VaadinSession.getCurrent().setAttribute("user", USER);
 				return true;
 			}
@@ -73,6 +73,7 @@ public class Authentication {
 	}
 	
 	public void doLogout() {
+		System.out.println("User: " + USER.getMail() + " has logged out.");
 		USER = null;
 	}
 

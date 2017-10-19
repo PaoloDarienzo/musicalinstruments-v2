@@ -6,6 +6,7 @@ import com.vaadin.navigator.View;
 import com.vaadin.server.Page;
 import com.vaadin.server.Responsive;
 import com.vaadin.server.ThemeResource;
+import com.vaadin.shared.Position;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
@@ -23,7 +24,7 @@ import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
-import controller.HomeUI;
+import controller.MyUI;
 
 @SuppressWarnings("serial")
 public class LoginView extends VerticalLayout implements View {
@@ -56,8 +57,8 @@ public class LoginView extends VerticalLayout implements View {
                 "Welcome to zumzum.it");
         notification.setHtmlContentAllowed(true);
         notification.setStyleName("tray dark small closable login-help");
-        notification.setPosition(Notification.POSITION_CENTERED_BOTTOM);
-        notification.setDelayMsec(20000);
+        notification.setPosition(Position.BOTTOM_CENTER);
+        notification.setDelayMsec(1500);
         notification.show(Page.getCurrent());
         
     }
@@ -116,7 +117,7 @@ public class LoginView extends VerticalLayout implements View {
         signin.addClickListener(new ClickListener() {
             @Override
             public void buttonClick(final ClickEvent event) {
-            	if(HomeUI.AUTH.authenticate(username.getValue(), password.getValue())) {
+            	if(MyUI.AUTH.authenticate(username.getValue(), password.getValue())) {
             		goToMainView();
             	}
             	else {
@@ -160,7 +161,7 @@ public class LoginView extends VerticalLayout implements View {
 	}
 	
 	private void goToRegisterView() {
-		Page.getCurrent().setTitle("zumzum.it");
+		Page.getCurrent().setTitle("zumzum.it - register");
     	UI.getCurrent().setContent(new RegisterView());
         removeStyleName("loginview");
 	}
