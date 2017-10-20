@@ -117,6 +117,14 @@ public class LoginView extends VerticalLayout implements View {
         signin.addClickListener(new ClickListener() {
             @Override
             public void buttonClick(final ClickEvent event) {
+            	if(username.getValue().isEmpty()) {
+            		Notification.show("Insert username o email", Notification.Type.WARNING_MESSAGE);
+            		return;
+            	}
+            	if(password.getValue().isEmpty()) {
+            		Notification.show("Insert password", Notification.Type.WARNING_MESSAGE);
+            		return;
+            	}
             	if(MyUI.AUTH.authenticate(username.getValue(), password.getValue())) {
             		goToMainView();
             	}

@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.vaadin.server.Page;
 import com.vaadin.server.ThemeResource;
+import com.vaadin.shared.ui.ContentMode;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.ComboBox;
@@ -12,6 +13,8 @@ import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Image;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Notification;
+import com.vaadin.ui.Panel;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
@@ -39,7 +42,10 @@ public class RegisterView extends VerticalLayout {
         addComponent(logo);
         setComponentAlignment(logo, Alignment.TOP_CENTER);
         
-        VerticalLayout mainContent = new VerticalLayout();
+        Panel mainContent = new Panel("Registration Form");
+        mainContent.setSizeUndefined();
+        
+        //VerticalLayout mainContent = new VerticalLayout();
         
         FormLayout loginForm = new FormLayout();
         
@@ -73,7 +79,7 @@ public class RegisterView extends VerticalLayout {
         telNum.setMaxLength(15);
         telNum.setPlaceholder("Enter telephone number");
         
-        TextField cellNum = new TextField("Cellphone number");
+        TextField cellNum = new TextField("Cellphone number*");
         cellNum.setMaxLength(50);
         cellNum.setPlaceholder("Enter cellphone number");
         
@@ -91,6 +97,17 @@ public class RegisterView extends VerticalLayout {
         loginForm.addComponents(mail, username, psw, pswRepeated, 
         		name, surname, fiscalCode, telNum, cellNum, city, userType);
         
+        //mainContent.addComponent(loginForm);
+        
+        loginForm.setSizeUndefined(); // Shrink to fit
+        loginForm.setMargin(true);
+        mainContent.setContent(loginForm);
+        
+        Label infoLabel1 = new Label("<i>Fields marked with *</i>", ContentMode.HTML);
+        Label infoLabel2 = new Label("<i>are not required.</i>", ContentMode.HTML);
+        //mainContent.addComponent(infoLabel);
+        loginForm.addComponents(infoLabel1, infoLabel2);
+        
         HorizontalLayout btns = new HorizontalLayout();
         Button confirm = new Button("Confirm");
         confirm.addStyleName(ValoTheme.BUTTON_PRIMARY);
@@ -99,9 +116,11 @@ public class RegisterView extends VerticalLayout {
         btns.setComponentAlignment(cancel, Alignment.MIDDLE_LEFT);
         btns.setComponentAlignment(cancel, Alignment.MIDDLE_RIGHT);
         
+        //mainContent.addComponent(btns);
         loginForm.addComponent(btns);
         
-        mainContent.addComponent(loginForm);
+        addComponent(mainContent);
+        setComponentAlignment(mainContent, Alignment.MIDDLE_CENTER);
         
         cancel.addClickListener(new ClickListener() {
             @Override
@@ -113,6 +132,31 @@ public class RegisterView extends VerticalLayout {
         confirm.addClickListener(new ClickListener() {
             @Override
             public void buttonClick(final ClickEvent event) {
+            	
+            	String regex = "[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}";
+            	
+            	if(		username.getValue().isEmpty() ||
+                		psw.getValue().isEmpty() || pswRepeated.getValue().isEmpty() ||
+                		name.getValue().isEmpty() ||
+                		surname.getValue().isEmpty() ||
+                		fiscalCode.getValue().isEmpty() ||
+                		telNum.getValue().isEmpty() ||
+                		city.getValue().isEmpty()
+            			) {
+                		Notification.show("All fields are required", Notification.Type.WARNING_MESSAGE);
+                		return;
+                	}
+            	if(!(mail.getValue().matches(regex))) {
+            		Notification.show("E-mail not valid", Notification.Type.WARNING_MESSAGE);
+            		return;
+            	}
+            	if(!(psw.getValue().equals(pswRepeated.getValue()))) {
+            		Notification.show("Password doesn't match: repeat password", Notification.Type.WARNING_MESSAGE);
+            		return;
+            	}
+            	//TODO
+            	//Check type of user and insert check of fiscal code
+            	//then, proceed to register the user
             	System.out.println(mail.getValue());
             	System.out.println(username.getValue());
             	System.out.println(name.getValue());
