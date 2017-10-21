@@ -2,7 +2,6 @@ package view;
 
 import com.vaadin.event.ShortcutAction.KeyCode;
 import com.vaadin.icons.VaadinIcons;
-import com.vaadin.navigator.View;
 import com.vaadin.server.Page;
 import com.vaadin.server.Responsive;
 import com.vaadin.server.ThemeResource;
@@ -27,7 +26,7 @@ import com.vaadin.ui.themes.ValoTheme;
 import controller.MyUI;
 
 @SuppressWarnings("serial")
-public class LoginView extends VerticalLayout implements View {
+public class LoginView extends VerticalLayout{
 
     public LoginView() {
     	

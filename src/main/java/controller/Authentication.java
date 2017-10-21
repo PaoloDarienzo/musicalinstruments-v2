@@ -1,7 +1,6 @@
 package controller;
 
 import java.net.UnknownHostException;
-import java.security.NoSuchAlgorithmException;
 
 import com.vaadin.server.VaadinSession;
 
@@ -33,12 +32,7 @@ public class Authentication {
 	
 	public Boolean authenticate(String userID, String psw){
 		
-		try {
-			psw = Encode.cryptingString(psw);
-		} catch (NoSuchAlgorithmException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		psw = Encode.cryptingString(psw);
 		
 		if(dao.UserDAO.isUserInDatabase(userID)) {//Account found
 			

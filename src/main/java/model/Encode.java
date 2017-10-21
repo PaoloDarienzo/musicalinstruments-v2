@@ -16,12 +16,17 @@ public class Encode {
 	 * Encrypts the value passed to the method
 	 * @param messageToEncrypt String that will be encrypted
 	 * @return String encrypted
-     * @throws NoSuchAlgorithmException if an error occurs with the encryption of the string, 
-     * i.e. the algorithm used for the encryption can't be found
 	 */
-	public static String cryptingString(String messageToEncrypt) throws NoSuchAlgorithmException{
+	public static String cryptingString(String messageToEncrypt){
 		
-		MessageDigest md5 = MessageDigest.getInstance("MD5");
+		MessageDigest md5 = null;
+		try {
+			md5 = MessageDigest.getInstance("MD5");
+		} catch (NoSuchAlgorithmException e) {
+			// TODO
+			//Alghoritm not found
+			e.printStackTrace();
+		}
 		md5.update(StandardCharsets.UTF_8.encode(messageToEncrypt));
 		
 		return (String.format("%032x", new BigInteger(1, md5.digest())));

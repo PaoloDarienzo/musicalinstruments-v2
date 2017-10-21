@@ -5,7 +5,6 @@ package tests;
 
 import static org.junit.Assert.*;
 
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import org.junit.Test;
@@ -23,10 +22,9 @@ public class TestUser {
 
 	/**
 	 * Tests the creation of <i>User</i> and the <i>get</i> and <i>set</i> methods.
-	 * @throws NoSuchAlgorithmException if an error occurs with the encryption of the string
 	 */
 	@Test
-	public void testCreation() throws NoSuchAlgorithmException {
+	public void testCreation(){
 		
 		List<User> users = InitializationForTests.userInit();
 

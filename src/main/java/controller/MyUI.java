@@ -61,30 +61,6 @@ public class MyUI extends UI {
         }
     }
     
-    /*
-    @Subscribe
-    public void userLoginRequested(final UserLoginRequestedEvent event) {
-        User user = getDataProvider().authenticate(event.getUserName(),
-                event.getPassword());
-        VaadinSession.getCurrent().setAttribute(User.class.getName(), user);
-        updateContent();
-    }
-    
-    public void userLoggedOut() {
-        // When the user logs out, current VaadinSession gets closed and the
-        // page gets reloaded on the login screen. Do notice that this doesn't
-        // invalidate the current HttpSession.
-        VaadinSession.getCurrent().close();
-        Page.getCurrent().reload();
-    }
-
-    public void closeOpenWindows(final CloseOpenWindowsEvent event) {
-        for (Window window : getWindows()) {
-            window.close();
-        }
-    }
-    */
-    
     public void userLoggedOut() {
         // When the user logs out, current VaadinSession gets closed and the
         // page gets reloaded on the login screen. Do notice that this doesn't

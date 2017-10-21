@@ -2,7 +2,6 @@ package tests;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,9 +19,8 @@ public class InitializationForTests {
 	/**
 	 * Initialize a list of users
 	 * @return the list of initialized users
-	 * @throws NoSuchAlgorithmException if an error occurs with the encryption of the string
 	 */
-	protected static List<User> userInit() throws NoSuchAlgorithmException{
+	protected static List<User> userInit(){
 		
 		List<User> userList = new ArrayList<User>();
 		

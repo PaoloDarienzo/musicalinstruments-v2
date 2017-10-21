@@ -23,6 +23,12 @@ import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.themes.ValoTheme;
 
+import controller.MyUI;
+import dao.UserDAO;
+import model.Encode;
+import model.TipoCliente;
+import model.User;
+
 @SuppressWarnings("serial")
 public class RegisterView extends VerticalLayout {
 
@@ -133,6 +139,11 @@ public class RegisterView extends VerticalLayout {
             @Override
             public void buttonClick(final ClickEvent event) {
             	
+            	System.out.println("ComboBox: " + userType.getValue());
+            	if(userType.isEmpty()) {
+            		System.out.println("true");
+            	}
+            	
             	String regex = "[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}";
             	
             	if(		username.getValue().isEmpty() ||
@@ -141,7 +152,8 @@ public class RegisterView extends VerticalLayout {
                 		surname.getValue().isEmpty() ||
                 		fiscalCode.getValue().isEmpty() ||
                 		telNum.getValue().isEmpty() ||
-                		city.getValue().isEmpty()
+                		city.getValue().isEmpty() ||
+                		userType.isEmpty()
             			) {
                 		Notification.show("All fields are required", Notification.Type.WARNING_MESSAGE);
                 		return;
@@ -154,16 +166,63 @@ public class RegisterView extends VerticalLayout {
             		Notification.show("Password doesn't match: repeat password", Notification.Type.WARNING_MESSAGE);
             		return;
             	}
+            	
+            	//Fiscal code of a person
+            	regex = "^[a-zA-Z]{6}[0-9]{2}[a-zA-Z][0-9]{2}[a-zA-Z][0-9]{3}[a-zA-Z]";
+            	if(!fiscalCode.getValue().matches(regex)) {
+            		//Fiscal code of an entity or company
+            		regex = "[a-zA-Z]{8,9}";
+            		if(!(fiscalCode.getValue().matches(regex) && userType.getValue().equals("Scholastic user"))) {
+            			Notification.show("Fiscal code inserted is wrong.", Notification.Type.WARNING_MESSAGE);
+            			return;
+            		}
+            	}
+            	
             	//TODO
-            	//Check type of user and insert check of fiscal code
-            	//then, proceed to register the user
-            	System.out.println(mail.getValue());
-            	System.out.println(username.getValue());
-            	System.out.println(name.getValue());
-            	System.out.println(surname.getValue());
-            	System.out.println(psw.getValue());
-            	System.out.println(telNum.getValue());
-            	System.out.println(cellNum.getValue());
+            	System.out.println("mail: " + mail.getValue());
+            	System.out.println("username: " + username.getValue());
+            	System.out.println("psw: " + psw.getValue());
+            	System.out.println("psw repeated: " + pswRepeated.getValue());
+            	System.out.println("name: " + name.getValue());
+            	System.out.println("surname: " + surname.getValue());
+            	System.out.println("cf: " + fiscalCode.getValue());
+            	System.out.println("tel: " + telNum.getValue());
+            	System.out.println("cell: " + cellNum.getValue());
+            	System.out.println("city: " + city.getValue());
+            	System.out.println("usertype: " + userType.getValue());
+            	
+            	User utente = null;
+            	
+            	TipoCliente userTypeEnum;
+            	switch(userType.getValue()) {
+    			case "Casual user":
+    				userTypeEnum = TipoCliente.OCCASIONALE;
+    				break;
+    			case "Professional user":
+    				userTypeEnum = TipoCliente.PROFESSIONISTA;
+    				break;
+    			case "Scholastic user":
+    				userTypeEnum = TipoCliente.TITOLARE;
+    				break;
+    			default:
+    				userTypeEnum = TipoCliente.OCCASIONALE;
+    			}
+            	
+            	if (!cellNum.getValue().isEmpty()) {
+    				utente = new User(mail.getValue(), username.getValue(), Encode.cryptingString(psw.getValue()), 
+    						name.getValue(), surname.getValue(), telNum.getValue(), city.getValue(),
+    						fiscalCode.getValue(), userTypeEnum, cellNum.getValue());
+    			}
+    			else {
+    				utente = new User(mail.getValue(), username.getValue(), Encode.cryptingString(psw.getValue()), 
+    						name.getValue(), surname.getValue(), telNum.getValue(), city.getValue(),
+    						fiscalCode.getValue(), userTypeEnum);
+    			}
+            	
+            	UserDAO.addInDatabase(utente);
+            	
+            	goToMainView(mail.getValue(), psw.getValue());
+            	
             }
         });
         
@@ -173,6 +232,17 @@ public class RegisterView extends VerticalLayout {
 		Page.getCurrent().setTitle("zumzum.it - login");
         UI.getCurrent().setContent(new LoginView());
         addStyleName("loginview");	
+	}
+	
+	protected void goToMainView(String mail, String psw) {
+		if(MyUI.AUTH.authenticate(mail, psw)) {
+			Page.getCurrent().setTitle("zumzum.it");
+			UI.getCurrent().setContent(new MainView());
+	        removeStyleName("loginview");
+		}
+		else {
+			Notification.show("Error in register or in redirect.", Notification.Type.ERROR_MESSAGE);
+		}
 	}
 
 }
