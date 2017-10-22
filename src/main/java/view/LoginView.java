@@ -23,7 +23,7 @@ import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
-import controller.MyUI;
+import controller.Authentication;
 
 @SuppressWarnings("serial")
 public class LoginView extends VerticalLayout{
@@ -83,10 +83,12 @@ public class LoginView extends VerticalLayout{
         fields.addStyleName("fields");
 
         final TextField username = new TextField("Username");
+        username.setPlaceholder("Username or e-mail");
         username.setIcon(VaadinIcons.USER);
         username.addStyleName(ValoTheme.TEXTFIELD_INLINE_ICON);
 
         final PasswordField password = new PasswordField("Password");
+        password.setPlaceholder("Password");
         password.setIcon(VaadinIcons.LOCK);
         password.addStyleName(ValoTheme.TEXTFIELD_INLINE_ICON);
 
@@ -101,7 +103,7 @@ public class LoginView extends VerticalLayout{
         authentication.addComponent(fields);
         
         HorizontalLayout options = new HorizontalLayout();
-        CheckBox checkBox = new CheckBox("Remember me", true);
+        CheckBox checkBox = new CheckBox("Remember me", false);
         Button registerBtn = new Button("Not registered?");
         registerBtn.addStyleName(ValoTheme.BUTTON_LINK);
         options.addComponents(checkBox, registerBtn);
@@ -117,14 +119,16 @@ public class LoginView extends VerticalLayout{
             @Override
             public void buttonClick(final ClickEvent event) {
             	if(username.getValue().isEmpty()) {
-            		Notification.show("Insert username o email", Notification.Type.WARNING_MESSAGE);
+            		Notification.show("Insert username or e-mail", Notification.Type.WARNING_MESSAGE);
             		return;
             	}
             	if(password.getValue().isEmpty()) {
             		Notification.show("Insert password", Notification.Type.WARNING_MESSAGE);
             		return;
             	}
-            	if(MyUI.AUTH.authenticate(username.getValue(), password.getValue())) {
+            	
+            	Authentication localAuth = (Authentication) UI.getCurrent().getSession().getAttribute("AUTH");
+            	if(localAuth.authenticate(username.getValue(), password.getValue())) {
             		goToMainView();
             	}
             	else {

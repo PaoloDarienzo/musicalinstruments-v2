@@ -23,7 +23,7 @@ import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.themes.ValoTheme;
 
-import controller.MyUI;
+import controller.Authentication;
 import dao.UserDAO;
 import model.Encode;
 import model.TipoCliente;
@@ -139,11 +139,6 @@ public class RegisterView extends VerticalLayout {
             @Override
             public void buttonClick(final ClickEvent event) {
             	
-            	System.out.println("ComboBox: " + userType.getValue());
-            	if(userType.isEmpty()) {
-            		System.out.println("true");
-            	}
-            	
             	String regex = "[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}";
             	
             	if(		username.getValue().isEmpty() ||
@@ -235,13 +230,21 @@ public class RegisterView extends VerticalLayout {
 	}
 	
 	protected void goToMainView(String mail, String psw) {
-		if(MyUI.AUTH.authenticate(mail, psw)) {
+		Authentication localAuth = (Authentication) UI.getCurrent().getSession().getAttribute("AUTH");
+		if(localAuth.authenticate(mail, psw)) {
 			Page.getCurrent().setTitle("zumzum.it");
 			UI.getCurrent().setContent(new MainView());
 	        removeStyleName("loginview");
 		}
 		else {
 			Notification.show("Error in register or in redirect.", Notification.Type.ERROR_MESSAGE);
+			try {
+				Thread.sleep(3000);
+				goToLoginView();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 

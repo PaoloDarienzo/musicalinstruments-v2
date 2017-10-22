@@ -28,12 +28,11 @@ import view.MainView;
 @Title("zumzum.it")
 public class MyUI extends UI {
 	
-	public static Authentication AUTH;
-
-    @Override
+	@Override
     protected void init(VaadinRequest vaadinRequest) {
     	
-    	AUTH = Authentication.getInstance();
+		Authentication auth = new Authentication();
+		VaadinSession.getCurrent().setAttribute("AUTH", auth);
     	
     	setTheme("mytheme");
     	addStyleName(ValoTheme.UI_WITH_MENU);
@@ -48,7 +47,9 @@ public class MyUI extends UI {
      * Otherwise login view is shown.
      */
     public void updateContent() {
-    	User user = (User) VaadinSession.getCurrent().getAttribute("user");
+    	
+    	Authentication localAuth = (Authentication) UI.getCurrent().getSession().getAttribute("AUTH");
+    	User user = localAuth.getUser();
         if (user != null) {
             // Authenticated user
         	Page.getCurrent().setTitle("zumzum.it");
@@ -65,7 +66,9 @@ public class MyUI extends UI {
         // When the user logs out, current VaadinSession gets closed and the
         // page gets reloaded on the login screen. Do notice that this doesn't
         // invalidate the current HttpSession.
-    	AUTH.doLogout();
+    	Authentication localAuth = (Authentication) UI.getCurrent().getSession().getAttribute("AUTH");
+    	localAuth.doLogout();
+    	UI.getCurrent().getSession().setAttribute("AUTH", localAuth);
         VaadinSession.getCurrent().close();
         Page.getCurrent().reload();
     }

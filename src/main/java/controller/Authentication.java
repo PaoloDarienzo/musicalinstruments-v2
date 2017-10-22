@@ -2,32 +2,24 @@ package controller;
 
 import java.net.UnknownHostException;
 
-import com.vaadin.server.VaadinSession;
+import com.vaadin.ui.UI;
 
 import model.Encode;
 import model.User;
 
 public class Authentication {
 	
-	private static Authentication AUTH = null;
-	private static User USER = null;
+	private User user = null;
 	
-	private Authentication() {
-	}
-	
-	protected static Authentication getInstance() {
-		if (AUTH == null) {
-			AUTH = new Authentication();
-		}
-		return AUTH;
+	public Authentication() {
 	}
 	
 	public User getUser() {
-		return Authentication.USER;
+		return this.user;
 	}
 	
 	private void setUser(User user) {
-		Authentication.USER = user;
+		this.user = user;
 	}
 	
 	public Boolean authenticate(String userID, String psw){
@@ -46,10 +38,11 @@ public class Authentication {
 				e.printStackTrace();
 			}
 			
-			if(Authentication.USER != null) { //if user is authenticated, do login
-				//TODO
-				System.out.println("User: " + USER.getMail() + " can login.");
-				VaadinSession.getCurrent().setAttribute("user", USER);
+			if(this.user != null) { //if user is authenticated, do login
+				System.out.println("User: " + this.user.getMail() + " can login.");
+				UI.getCurrent().getSession().setAttribute("AUTH", this);
+				System.out.println(this.toString());
+				//VaadinSession.getCurrent().setAttribute("user", this.user);
 				return true;
 			}
 			else {
@@ -67,8 +60,9 @@ public class Authentication {
 	}
 	
 	public void doLogout() {
-		System.out.println("User: " + USER.getMail() + " has logged out.");
-		USER = null;
+		System.out.println("User: " + this.user.getMail() + " has logged out.");
+		this.user = null;
+		UI.getCurrent().getSession().setAttribute("AUTH", this);
 	}
 
 }
