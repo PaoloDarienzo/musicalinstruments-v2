@@ -2,14 +2,15 @@ package view;
 
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Grid;
-import com.vaadin.ui.PopupView;
-import com.vaadin.ui.TextField;
+import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.Window;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.renderers.ButtonRenderer;
 import com.vaadin.ui.themes.ValoTheme;
 
+import controller.Authentication;
 import model.DeliveryPoint;
 import model.Payment;
 import model.User;
@@ -19,9 +20,10 @@ public class userListsLayout extends VerticalLayout {
 	
 	private User user;
 
-	userListsLayout(User user){
+	userListsLayout(){
 		
-		this.user = user;
+		Authentication localAuth = (Authentication) UI.getCurrent().getSession().getAttribute("AUTH");
+		this.user = localAuth.getUser();
 		
 		setSizeUndefined();
 		
@@ -55,7 +57,15 @@ public class userListsLayout extends VerticalLayout {
 		addBtn.addClickListener(new ClickListener() {
             @Override
             public void buttonClick(final ClickEvent event) {
-            	            	
+            	
+                Window subWindow = new addPaymentWindow("Add payment");
+
+                // Center it in the browser window
+                subWindow.center();
+
+                // Open it in the UI
+                UI.getCurrent().addWindow(subWindow);
+                
             }
         });
 		
@@ -89,6 +99,14 @@ public class userListsLayout extends VerticalLayout {
             @Override
             public void buttonClick(final ClickEvent event) {
             	
+                Window subWindow = new addDlvPointWindow("Add delivery point");
+
+                // Center it in the browser window
+                subWindow.center();
+
+                // Open it in the UI
+                UI.getCurrent().addWindow(subWindow);
+                
             }
         });
 		

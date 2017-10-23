@@ -1,14 +1,19 @@
 package view;
 
 import com.vaadin.ui.Label;
+import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
+import controller.Authentication;
 import model.User;
 
 @SuppressWarnings("serial")
 public class userInfoLayout extends VerticalLayout {
 	
-	userInfoLayout(User user){
+	userInfoLayout(){
+		
+		Authentication localAuth = (Authentication) UI.getCurrent().getSession().getAttribute("AUTH");
+		User user = localAuth.getUser();
 		
 		setSizeUndefined();
 		
