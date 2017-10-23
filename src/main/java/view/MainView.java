@@ -4,7 +4,6 @@ import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.server.Page;
 import com.vaadin.ui.HorizontalSplitPanel;
-import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.Notification.Type;
@@ -22,27 +21,24 @@ public class MainView extends VerticalLayout implements View{
     	
         addStyleName("mainview");
         
-        //MenuBar header = new MenuBar();
-        //VerticalLayout contentLayout = new VerticalLayout();
-        
         HorizontalSplitPanel panel = new HorizontalSplitPanel();
         
         VerticalMenu verticalMenu = new VerticalMenu();
         
         VerticalLayout contentView = new VerticalLayout();
-        //Navigator navigatorMenu = new Navigator();
+        
+        new Navigator(UI.getCurrent(), contentView);
+        
+        UI.getCurrent().getNavigator().addView(HomeView.NAME, HomeView.class);
+        UI.getCurrent().getNavigator().addView(ProfileView.NAME, ProfileView.class);
+        UI.getCurrent().getNavigator().addView(CartView.NAME, CartView.class);
         
         panel.setFirstComponent(verticalMenu);
-        panel.setSecondComponent(new Label("[ here goes the pretty body ]"));
-        //panel.setSecondComponent(new HomeView());
+        panel.setSecondComponent(contentView);
         
         panel.setSplitPosition(25, Unit.PERCENTAGE);
         
         addComponent(panel);
-        
-        //addComponents(header, contentLayout);
-        
-        //Navigator navigator = new Navigator(UI.getCurrent(), contentLayout);
         
         Notification notification = new Notification("Welcome, " +localAuth.getUser().getNomeUtente(), Type.TRAY_NOTIFICATION);
         notification.show(Page.getCurrent());

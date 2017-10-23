@@ -55,7 +55,6 @@ public class MyUI extends UI {
         if (user != null) {
             // Authenticated user
         	Page.getCurrent().setTitle("zumzum.it");
-        	//setContent(new MainUI());
             setContent(new MainView());
             removeStyleName("loginview");
         } else {

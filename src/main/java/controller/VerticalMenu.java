@@ -1,8 +1,5 @@
 package controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.server.Page;
 import com.vaadin.server.ThemeResource;
@@ -17,10 +14,12 @@ import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
+import view.CartView;
+import view.HomeView;
+import view.ProfileView;
+
 @SuppressWarnings("serial")
 public class VerticalMenu extends VerticalLayout{
-	
-	private List<Button> buttons;
 	
     //initialize root & other components
     {
@@ -55,32 +54,24 @@ public class VerticalMenu extends VerticalLayout{
     }
     
     private void initButtons(){
-        
-    	buttons = new ArrayList<Button>();
-        
-        buttons.add(new Button("First"));
-        buttons.add(new Button("Second"));
-        buttons.add(new Button("Third"));
-        
-        
-        for(Button button:buttons){
-            button.addClickListener((clickEvent)->{
-                Notification.show("i'm "+button.getCaption()+" Button");
-            });
-            switch(button.getCaption()){
-            case "First":{button.setIcon(VaadinIcons.USER);}break;
-            case "Second":{button.setIcon(VaadinIcons.CLOUD);}break;
-            case "Third":{button.setIcon(VaadinIcons.MAGIC);}break;
-            
-            }
-            addComponent(button);
-        }
+    	
+    	Button homeBtn = new Button("Home");
+    	homeBtn.setIcon(VaadinIcons.HOME);
+    	homeBtn.addClickListener(e -> goToHomeView());
+    	
+    	Button userProfileBtn = new Button("Profile");
+    	userProfileBtn.setIcon(VaadinIcons.USER);
+    	userProfileBtn.addClickListener(e -> goToProfileView());
+    	
+    	Button cartBtn = new Button("Cart");
+    	cartBtn.setIcon(VaadinIcons.CART);
+    	cartBtn.addClickListener(e -> goToCartView());
         
         Button logoutBtn = new Button("Logout");
         logoutBtn.setIcon(VaadinIcons.EXIT);
         logoutBtn.addClickListener(e -> doLogout());
         
-        addComponent(logoutBtn);
+        addComponents(homeBtn, userProfileBtn, cartBtn, logoutBtn);
         
         
     }
@@ -95,6 +86,33 @@ public class VerticalMenu extends VerticalLayout{
         
 		((MyUI) UI.getCurrent()).userLoggedOut();
 		
+	}
+    
+    private void goToHomeView() {
+    	Notification notification = new Notification("Redirect to goToHomeView page...");
+    	notification.setDelayMsec(3000);
+    	notification.show(Page.getCurrent());
+    	
+    	UI.getCurrent().getNavigator().navigateTo(HomeView.NAME);
+		
+	}
+    
+    private void goToProfileView() {
+    	Notification notification = new Notification("Redirect to goToProfileView page...");
+    	notification.setDelayMsec(3000);
+    	notification.show(Page.getCurrent());
+    	
+    	UI.getCurrent().getNavigator().navigateTo(ProfileView.NAME);
+    	
+	}
+
+	private void goToCartView() {
+		Notification notification = new Notification("Redirect to goToCartView page...");
+    	notification.setDelayMsec(3000);
+    	notification.show(Page.getCurrent());
+    	
+    	UI.getCurrent().getNavigator().navigateTo(CartView.NAME);
+    	
 	}
 
 }
