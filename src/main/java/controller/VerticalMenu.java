@@ -41,7 +41,7 @@ public class VerticalMenu extends VerticalLayout{
     	HorizontalLayout logo = new HorizontalLayout();
     	logo.setSizeUndefined();
     	Label nameLogo = new Label("ZUMZUM.IT");
-        nameLogo.setStyleName("v-label-LOGO");
+        nameLogo.setStyleName("LOGO");
         nameLogo.addStyleName(ValoTheme.LABEL_COLORED);
         Image image = new Image("", new ThemeResource("img/duck-walking.gif"));
         image.setWidth(50, Unit.PIXELS);

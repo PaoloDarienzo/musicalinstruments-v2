@@ -34,10 +34,19 @@
 @mixin mytheme {
   @include valo;
 
-.v-label-LOGO {
-    font-size: 24px;
-    line-height: normal;
-}
+	.layout-with-border {
+	    border: 1px solid black;
+	}
+	
+	.v-label-LOGO {
+	    font-size: 30px;
+	    line-height: normal;
+	}
+	
+	.v-label-userProfile {
+	    font-size: 28px;
+	    line-height: normal;
+	}
 
 
 }

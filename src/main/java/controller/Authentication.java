@@ -18,7 +18,7 @@ public class Authentication {
 		return this.user;
 	}
 	
-	private void setUser(User user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 	

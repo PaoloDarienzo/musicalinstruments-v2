@@ -36,7 +36,7 @@ public class MainView extends VerticalLayout implements View{
         panel.setFirstComponent(verticalMenu);
         panel.setSecondComponent(contentView);
         
-        panel.setSplitPosition(25, Unit.PERCENTAGE);
+        panel.setSplitPosition(22, Unit.PERCENTAGE);
         
         addComponent(panel);
         

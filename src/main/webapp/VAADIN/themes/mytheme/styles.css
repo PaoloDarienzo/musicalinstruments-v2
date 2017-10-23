@@ -14780,7 +14780,16 @@ div.v-layout.v-horizontal.v-widget {
 	overflow: hidden;
 }
 
+.mytheme .layout-with-border {
+	border: 1px solid black;
+}
+
 .mytheme .v-label-LOGO {
-	font-size: 24px;
+	font-size: 30px;
+	line-height: normal;
+}
+
+.mytheme .v-label-userProfile {
+	font-size: 28px;
 	line-height: normal;
 }
