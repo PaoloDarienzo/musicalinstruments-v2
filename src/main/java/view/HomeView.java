@@ -23,36 +23,6 @@ public class HomeView extends VerticalLayout implements View {
 		panel.setSizeUndefined();
 		addComponent(panel);
 		
-		/*
-		//TODO
-		if(user.getNumeroCellulare().equals("N/A")) {
-			user.setNumeroCellulare("0");
-		}
-		
-		int foo = Integer.parseInt(user.getNumeroCellulare());
-		
-		if(user.getNomeUtente().equals("paolodarienzo")) {
-			foo = foo + 15;
-		}
-		else {
-			foo++;
-		}
-		
-		String newNum = Integer.toString(foo);
-		
-		user.setNumeroCellulare(newNum);
-		
-		localAuth.setUser(user);
-		
-		VaadinSession.getCurrent().setAttribute("AUTH", localAuth);
-		
-		String intero = localAuth.getUser().getNumeroCellulare();
-		
-		Label num = new Label(intero);
-		
-		addComponent(num);
-		*/
-		
 	}
 
 }

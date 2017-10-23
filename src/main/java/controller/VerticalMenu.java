@@ -98,12 +98,7 @@ public class VerticalMenu extends VerticalLayout{
 	}
     
     private void goToProfileView() {
-    	Notification notification = new Notification("Redirect to goToProfileView page...");
-    	notification.setDelayMsec(3000);
-    	notification.show(Page.getCurrent());
-    	
     	UI.getCurrent().getNavigator().navigateTo(ProfileView.NAME);
-    	
 	}
 
 	private void goToCartView() {
