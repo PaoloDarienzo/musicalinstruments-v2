@@ -82,7 +82,7 @@ public class LoginView extends VerticalLayout{
         HorizontalLayout fields = new HorizontalLayout();
         fields.addStyleName("fields");
 
-        final TextField username = new TextField("Username");
+        final TextField username = new TextField("Username or e-mail");
         username.setPlaceholder("Username or e-mail");
         username.setIcon(VaadinIcons.USER);
         username.addStyleName(ValoTheme.TEXTFIELD_INLINE_ICON);

@@ -1,5 +1,6 @@
 package view;
 
+import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.server.Page;
 import com.vaadin.ui.HorizontalSplitPanel;
@@ -28,8 +29,12 @@ public class MainView extends VerticalLayout implements View{
         
         VerticalMenu verticalMenu = new VerticalMenu();
         
+        VerticalLayout contentView = new VerticalLayout();
+        //Navigator navigatorMenu = new Navigator();
+        
         panel.setFirstComponent(verticalMenu);
         panel.setSecondComponent(new Label("[ here goes the pretty body ]"));
+        //panel.setSecondComponent(new HomeView());
         
         panel.setSplitPosition(25, Unit.PERCENTAGE);
         
@@ -41,16 +46,6 @@ public class MainView extends VerticalLayout implements View{
         
         Notification notification = new Notification("Welcome, " +localAuth.getUser().getNomeUtente(), Type.TRAY_NOTIFICATION);
         notification.show(Page.getCurrent());
-
-        /*
-        addComponent(new Label("Inside and logged; welcome, " + MyUI.AUTH.getUser().getNomeUtente() + "!"));
-
-        ComponentContainer content = new CssLayout();
-        content.addStyleName("view-content");
-        content.setSizeFull();
-        addComponent(content);
-        setExpandRatio(content, 1.0f);
-        */
         
     }
 

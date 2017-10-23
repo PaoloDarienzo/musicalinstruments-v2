@@ -2,6 +2,7 @@ package controller;
 
 import javax.servlet.annotation.WebServlet;
 
+import com.vaadin.annotations.PreserveOnRefresh;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
 import com.vaadin.annotations.VaadinServletConfiguration;
@@ -26,6 +27,7 @@ import view.MainView;
 @SuppressWarnings("serial")
 @Theme("mytheme")
 @Title("zumzum.it")
+@PreserveOnRefresh
 public class MyUI extends UI {
 	
 	@Override
@@ -53,6 +55,7 @@ public class MyUI extends UI {
         if (user != null) {
             // Authenticated user
         	Page.getCurrent().setTitle("zumzum.it");
+        	//setContent(new MainUI());
             setContent(new MainView());
             removeStyleName("loginview");
         } else {

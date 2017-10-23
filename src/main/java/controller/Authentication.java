@@ -41,8 +41,6 @@ public class Authentication {
 			if(this.user != null) { //if user is authenticated, do login
 				System.out.println("User: " + this.user.getMail() + " can login.");
 				UI.getCurrent().getSession().setAttribute("AUTH", this);
-				System.out.println(this.toString());
-				//VaadinSession.getCurrent().setAttribute("user", this.user);
 				return true;
 			}
 			else {
