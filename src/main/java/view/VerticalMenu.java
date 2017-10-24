@@ -54,6 +54,7 @@ public class VerticalMenu extends VerticalLayout{
     private void initButtons(){
     	
     	Button homeBtn = new Button("Home");
+    	homeBtn.setStyleName(ValoTheme.BUTTON_PRIMARY);
     	homeBtn.setIcon(VaadinIcons.HOME);
     	homeBtn.addClickListener(e -> goToHomeView());
     	
@@ -67,9 +68,15 @@ public class VerticalMenu extends VerticalLayout{
         
         Button logoutBtn = new Button("Logout");
         logoutBtn.setIcon(VaadinIcons.EXIT);
+        logoutBtn.setStyleName(ValoTheme.BUTTON_DANGER);
         logoutBtn.addClickListener(e -> doLogout());
         
-        addComponents(homeBtn, userProfileBtn, cartBtn, logoutBtn);
+        Label copyright = new Label("@copyright 2017 - Paolo D'Arienzo, Univr");
+        copyright.setStyleName("copyright");
+        copyright.addStyleName(ValoTheme.LABEL_LIGHT);
+        copyright.addStyleName(ValoTheme.LABEL_TINY);
+        
+        addComponents(homeBtn, userProfileBtn, cartBtn, logoutBtn, copyright);
         
         
     }

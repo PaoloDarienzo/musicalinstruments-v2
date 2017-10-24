@@ -14793,3 +14793,7 @@ div.v-layout.v-horizontal.v-widget {
 	font-size: 28px;
 	line-height: normal;
 }
+
+.mytheme .v-label-copyright {
+	font-style: italic;
+}
