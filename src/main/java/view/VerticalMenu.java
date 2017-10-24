@@ -1,4 +1,4 @@
-package controller;
+package view;
 
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.server.Page;
@@ -14,9 +14,7 @@ import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
-import view.CartView;
-import view.HomeView;
-import view.ProfileView;
+import controller.MyUI;
 
 @SuppressWarnings("serial")
 public class VerticalMenu extends VerticalLayout{
@@ -89,10 +87,6 @@ public class VerticalMenu extends VerticalLayout{
 	}
     
     private void goToHomeView() {
-    	Notification notification = new Notification("Redirect to goToHomeView page...");
-    	notification.setDelayMsec(3000);
-    	notification.show(Page.getCurrent());
-    	
     	UI.getCurrent().getNavigator().navigateTo(HomeView.NAME);
 		
 	}
@@ -102,12 +96,7 @@ public class VerticalMenu extends VerticalLayout{
 	}
 
 	private void goToCartView() {
-		Notification notification = new Notification("Redirect to goToCartView page...");
-    	notification.setDelayMsec(3000);
-    	notification.show(Page.getCurrent());
-    	
     	UI.getCurrent().getNavigator().navigateTo(CartView.NAME);
-    	
 	}
 
 }

@@ -10,7 +10,6 @@ import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.VerticalLayout;
 
 import controller.Authentication;
-import controller.VerticalMenu;
 
 @SuppressWarnings("serial")
 public class MainView extends VerticalLayout implements View{
@@ -42,6 +41,8 @@ public class MainView extends VerticalLayout implements View{
         
         Notification notification = new Notification("Welcome, " +localAuth.getUser().getNomeUtente(), Type.TRAY_NOTIFICATION);
         notification.show(Page.getCurrent());
+        
+        UI.getCurrent().getNavigator().navigateTo(HomeView.NAME);
         
     }
 

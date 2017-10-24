@@ -60,6 +60,7 @@ public class InitializationForTests {
 	 * @return the initialized list of products
 	 * @throws UnknownHostException if an error occurs with the determination of the IP address
 	 */
+	@SuppressWarnings("deprecation")
 	protected static List<Product> productInit() throws UnknownHostException{
 		
 		List<Product> productList = new ArrayList<Product>();

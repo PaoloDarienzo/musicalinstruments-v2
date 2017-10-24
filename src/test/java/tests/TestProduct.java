@@ -22,6 +22,7 @@ public class TestProduct {
 	 * Tests the creation of <i>Product</i> and the <i>get</i> methods.
 	 * @throws UnknownHostException if an error occurs with the determination of IP address
 	 */
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testCreation() throws UnknownHostException{
 		
