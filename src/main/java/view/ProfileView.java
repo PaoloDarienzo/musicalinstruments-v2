@@ -8,7 +8,7 @@ import com.vaadin.ui.VerticalLayout;
 @SuppressWarnings("serial")
 public class ProfileView extends HorizontalLayout implements View {
 	
-	public static final String NAME = "profileView";
+	public static final String NAME = "user_profile";
 	
 	public ProfileView(){
 				

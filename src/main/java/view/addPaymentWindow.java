@@ -24,6 +24,7 @@ public class addPaymentWindow extends Window {
 		super(caption);
 		
 		FormLayout addPmtForm = new FormLayout();
+		addPmtForm.setSizeFull();
 		
 		TextField nomeMetodo = new TextField("Method name");
 		nomeMetodo.setPlaceholder("Method name");

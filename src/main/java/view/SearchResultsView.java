@@ -6,7 +6,9 @@ import java.util.List;
 
 import com.vaadin.navigator.View;
 import com.vaadin.ui.Alignment;
+import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
@@ -15,7 +17,7 @@ import model.Product;
 @SuppressWarnings("serial")
 public class SearchResultsView extends VerticalLayout implements View {
 	
-	public static final String NAME = "resultsView";
+	public static final String NAME = "results";
 	
 	SearchResultsView(String search, String brandToSearch, String instrumentTypeToSearch,
 			String usedStatusToSearch, String productTypeToSearch){
@@ -74,6 +76,25 @@ public class SearchResultsView extends VerticalLayout implements View {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+        
+        for(Product product : queryResults) {
+        	
+        	GridLayout newGrid = new GridLayout();
+        	
+        	Panel productInfo = new Panel(product.getNome());
+        	
+        	VerticalLayout productInfoLayout = new VerticalLayout();
+        	productInfoLayout.addStyleName("layout-with-border");
+        	
+        	Label description = new Label(product.getDescrizione());
+        	Label price = new Label(String.valueOf(product.getPrezzo()));
+        	
+        	productInfoLayout.addComponents(description, price);
+        	
+        	productInfo.setContent(productInfoLayout);
+        	
+        	addComponent(productInfo);
+        }
 		
 	}
 

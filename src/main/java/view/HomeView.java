@@ -22,7 +22,7 @@ import com.vaadin.ui.themes.ValoTheme;
 @SuppressWarnings("serial")
 public class HomeView extends VerticalLayout implements View {
 
-	public static final String NAME = "homepageView";
+	public static final String NAME = "homepage";
 	
 	private TextField searchField;
     private ComboBox<String> brandToSearch;

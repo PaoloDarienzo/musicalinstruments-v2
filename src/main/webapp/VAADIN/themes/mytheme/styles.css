@@ -14797,3 +14797,9 @@ div.v-layout.v-horizontal.v-widget {
 .mytheme .v-label-copyright {
 	font-style: italic;
 }
+
+.mytheme .v-gridlayout-slot {
+	border-style: solid;
+	border-width: 1px;
+	border-color: black;
+}
