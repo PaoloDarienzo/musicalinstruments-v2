@@ -1,6 +1,7 @@
 package view;
 
 import com.vaadin.icons.VaadinIcons;
+import com.vaadin.server.Page;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.HorizontalLayout;
@@ -11,6 +12,7 @@ import com.vaadin.ui.Window;
 import com.vaadin.ui.themes.ValoTheme;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.Notification.Type;
 
 import controller.Authentication;
 import model.DeliveryPoint;
@@ -23,7 +25,8 @@ public class addDlvPointWindow extends Window {
 		
 		super(caption);
 		
-		FormLayout addPmtForm = new FormLayout();
+		FormLayout addDlvPointForm = new FormLayout();
+		addDlvPointForm.setMargin(true);
 		
 		TextField city = new TextField("City");
 		city.setPlaceholder("City");
@@ -36,7 +39,7 @@ public class addDlvPointWindow extends Window {
 		
 		HorizontalLayout btns = new HorizontalLayout();
 		Button cancelBtn = new Button("Cancel");
-		cancelBtn.setStyleName(ValoTheme.BUTTON_PRIMARY);
+		cancelBtn.setStyleName(ValoTheme.BUTTON_DANGER);
 		cancelBtn.setIcon(VaadinIcons.ARROW_BACKWARD);
 		cancelBtn.addClickListener(e -> close());
 		Button confirmBtn = new Button("Confirm");
@@ -44,7 +47,7 @@ public class addDlvPointWindow extends Window {
 		confirmBtn.setIcon(VaadinIcons.PLUS);
 		btns.addComponents(cancelBtn, confirmBtn);
 		
-		addPmtForm.addComponents(city, address, streetNum, CAP, btns);
+		addDlvPointForm.addComponents(city, address, streetNum, CAP, btns);
 		
 		confirmBtn.addClickListener(new ClickListener() {
             @Override
@@ -55,7 +58,8 @@ public class addDlvPointWindow extends Window {
             		streetNum.getValue().isEmpty() ||
             		CAP.getValue().isEmpty()
             	) {
-                	Notification.show("All fields are required", Notification.Type.WARNING_MESSAGE);
+            		Notification notification = new Notification("All fields are required", Notification.Type.WARNING_MESSAGE);
+                    notification.show(Page.getCurrent());
                 	return;
                 }
             	else {
@@ -73,7 +77,7 @@ public class addDlvPointWindow extends Window {
             }
         });
 		
-		setContent(addPmtForm);
+		setContent(addDlvPointForm);
 	}
 	
 }

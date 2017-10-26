@@ -28,7 +28,8 @@ public class CartView extends VerticalLayout implements View {
 		Authentication localAuth = (Authentication) UI.getCurrent().getSession().getAttribute("AUTH");
 		User user = localAuth.getUser();
 		
-		Panel cart = new Panel("Cart");
+		Panel cart = new Panel("<b>Cart</b>");
+		cart.setCaptionAsHtml(true);
 		cart.setIcon(VaadinIcons.CART_O);
 		
 		cart.setSizeFull();
@@ -57,7 +58,7 @@ public class CartView extends VerticalLayout implements View {
 			cartRecap.setSizeFull();
 			
 			int cols = 6;
-			int rows = 6 + user.getShoppingCart().getArticoliInCarrello().size();
+			int rows = 5 + user.getShoppingCart().getArticoliInCarrello().size();
 			
 			GridLayout gridCart = new GridLayout(cols, rows);
 			gridCart.setMargin(true);
@@ -135,7 +136,9 @@ public class CartView extends VerticalLayout implements View {
 
 			}
 			
-			gridCart.addComponent(new Label("RIEPILOGO"), 0, rows - 3, cols - 1, rows - 3);
+			Label riepilogoLabel = new Label("RIEPILOGO");
+			riepilogoLabel.setStyleName(ValoTheme.LABEL_BOLD);
+			gridCart.addComponent(riepilogoLabel, 0, rows - 3, cols - 1, rows - 3);
 			
 			gridCart.addComponent(new Label("Articoli totali:"), 0, rows - 2, 2, rows - 2);
 			gridCart.addComponent(new Label(String.valueOf(user.getShoppingCart().getNumberOfItems())), 
@@ -147,6 +150,9 @@ public class CartView extends VerticalLayout implements View {
 			gridCart.addComponent(new Label(totalPrice.format("%.2f", user.getShoppingCart().getTotalPrice()).toString() +  " €"), 
 					3, rows - 1, cols - 2, rows - 1);
 			
+			HorizontalLayout checkoutBtnLayout = new HorizontalLayout();
+			checkoutBtnLayout.setMargin(true);
+			
 			Button checkOutBtn = new Button("Check out!");
 			checkOutBtn.setStyleName(ValoTheme.BUTTON_FRIENDLY);
 			checkOutBtn.addStyleName(ValoTheme.BUTTON_SMALL);
@@ -154,8 +160,9 @@ public class CartView extends VerticalLayout implements View {
 				UI.getCurrent().getNavigator().addView(checkOutView.NAME, checkOutView.class);
 				UI.getCurrent().getNavigator().navigateTo(checkOutView.NAME);
 			});
+			checkoutBtnLayout.addComponent(checkOutBtn);
 			
-			gridCart.addComponent(checkOutBtn, cols - 1, rows - 1);
+			gridCart.addComponent(checkoutBtnLayout, cols - 1, rows - 1);
 			
 			cartRecap.addComponent(gridCart);
 			

@@ -14803,3 +14803,7 @@ div.v-layout.v-horizontal.v-widget {
 	border-width: 1px;
 	border-color: black;
 }
+
+.mytheme .layout-backgroud-colored {
+	background-color: #009900;
+}

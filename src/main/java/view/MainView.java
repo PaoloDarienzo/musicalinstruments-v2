@@ -39,7 +39,7 @@ public class MainView extends VerticalLayout implements View{
         
         addComponent(panel);
         
-        Notification notification = new Notification("Welcome, " +localAuth.getUser().getNomeUtente(), Type.TRAY_NOTIFICATION);
+        Notification notification = new Notification("Welcome, " + localAuth.getUser().getNomeUtente(), Type.TRAY_NOTIFICATION);
         notification.show(Page.getCurrent());
         
         UI.getCurrent().getNavigator().navigateTo(HomeView.NAME);

@@ -1,0 +1,36 @@
+package view;
+
+import com.vaadin.navigator.View;
+import com.vaadin.ui.Alignment;
+import com.vaadin.ui.Button;
+import com.vaadin.ui.Label;
+import com.vaadin.ui.UI;
+import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.themes.ValoTheme;
+
+@SuppressWarnings("serial")
+public class PurchaseConfirmedView extends VerticalLayout implements View {
+	
+	public static final String NAME = "purchase_confirmed";
+	
+	public PurchaseConfirmedView(){
+		
+		Label success = new Label("Success! Order confirmed!");
+		success.addStyleName(ValoTheme.LABEL_H1);
+		
+		addComponent(success);
+		setComponentAlignment(success, Alignment.MIDDLE_CENTER);
+		
+		Button goTo = new Button("Go to homepage");
+		goTo.setStyleName(ValoTheme.BUTTON_FRIENDLY);
+		goTo.addStyleName(ValoTheme.BUTTON_LARGE);
+		goTo.addClickListener(e -> {
+			UI.getCurrent().getNavigator().navigateTo(HomeView.NAME);
+		});
+		
+		addComponent(goTo);
+		setComponentAlignment(goTo, Alignment.MIDDLE_CENTER);
+		
+	}
+
+}

@@ -32,7 +32,7 @@ public class MyUI extends UI {
 	
 	@Override
     protected void init(VaadinRequest vaadinRequest) {
-    	
+		
 		Authentication auth = new Authentication();
 		VaadinSession.getCurrent().setAttribute("AUTH", auth);
     	
@@ -78,5 +78,30 @@ public class MyUI extends UI {
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
     @VaadinServletConfiguration(ui = MyUI.class, productionMode = false)
     public static class MyUIServlet extends VaadinServlet {
+    }
+    
+    /**
+	 * Gets the IP address (IPv6) of the client
+	 * @param request passed from client
+	 * @return String containing the IP address
+	 */
+	public String getClientIpAddr(VaadinRequest request) {
+        String ip = request.getHeader("X-Forwarded-For");  
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {  
+            ip = request.getHeader("Proxy-Client-IP");  
+        }  
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {  
+            ip = request.getHeader("WL-Proxy-Client-IP");  
+        }  
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {  
+            ip = request.getHeader("HTTP_CLIENT_IP");  
+        }  
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {  
+            ip = request.getHeader("HTTP_X_FORWARDED_FOR");  
+        }  
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {  
+            ip = request.getRemoteAddr();  
+        }  
+        return ip;  
     }
 }

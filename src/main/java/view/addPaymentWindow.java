@@ -1,6 +1,7 @@
 package view;
 
 import com.vaadin.icons.VaadinIcons;
+import com.vaadin.server.Page;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.HorizontalLayout;
@@ -10,6 +11,7 @@ import com.vaadin.ui.UI;
 import com.vaadin.ui.Window;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.themes.ValoTheme;
 
 import controller.Authentication;
@@ -24,7 +26,7 @@ public class addPaymentWindow extends Window {
 		super(caption);
 		
 		FormLayout addPmtForm = new FormLayout();
-		addPmtForm.setSizeFull();
+		addPmtForm.setMargin(true);
 		
 		TextField nomeMetodo = new TextField("Method name");
 		nomeMetodo.setPlaceholder("Method name");
@@ -34,7 +36,7 @@ public class addPaymentWindow extends Window {
 		
 		HorizontalLayout btns = new HorizontalLayout();
 		Button cancelBtn = new Button("Cancel");
-		cancelBtn.setStyleName(ValoTheme.BUTTON_PRIMARY);
+		cancelBtn.setStyleName(ValoTheme.BUTTON_DANGER);
 		cancelBtn.setIcon(VaadinIcons.ARROW_BACKWARD);
 		cancelBtn.addClickListener(e -> close());
 		Button confirmBtn = new Button("Confirm");
@@ -50,7 +52,8 @@ public class addPaymentWindow extends Window {
             	            	
             	if(nomeMetodo.getValue().isEmpty() ||
             	credenzialiMetodo.getValue().isEmpty()) {
-                	Notification.show("All fields are required", Notification.Type.WARNING_MESSAGE);
+            		Notification notification = new Notification("All fields are required", Notification.Type.WARNING_MESSAGE);
+                    notification.show(Page.getCurrent());
                 	return;
                 }
             	else {
@@ -70,6 +73,5 @@ public class addPaymentWindow extends Window {
 		setContent(addPmtForm);
 		
 	}
-	
 	
 }
