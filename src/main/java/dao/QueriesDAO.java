@@ -179,7 +179,7 @@ public class QueriesDAO {
 	 * Executes a query on the database <i>strumenti_database</i>, on the table indicated,
 	 *  in search of the maximum value of <i>ID</i>.
 	 * @param tabella is the table in which searching the maximum value
-	 * @return an int representing the maximum value found for the ID
+	 * @return an integer representing the maximum value found for the ID
 	 */
 	public static int maxIDInDatabase(String tabella){
 		

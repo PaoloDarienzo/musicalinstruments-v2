@@ -2,7 +2,6 @@ package model;
 
 import dao.PaymentDAO;
 
-
 /**
  * Payment class represents the method of payment of the user.
  * @author Paolo D'Arienzo

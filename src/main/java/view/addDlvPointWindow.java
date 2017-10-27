@@ -12,15 +12,24 @@ import com.vaadin.ui.Window;
 import com.vaadin.ui.themes.ValoTheme;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
-import com.vaadin.ui.Notification.Type;
 
 import controller.Authentication;
 import model.DeliveryPoint;
 import model.User;
 
+/**
+ * This class creates the pop-up window that manages the adding of a delivery point.
+ * @author Paolo D'Arienzo
+ * @version 2.0
+ *
+ */
 @SuppressWarnings("serial")
 public class addDlvPointWindow extends Window {
 
+	/**
+	 * Extends the constructor of the window, adding the form used for adding the delivery point.
+	 * @param caption is the caption string to pass to the constructor of the Window
+	 */
 	addDlvPointWindow(String caption){
 		
 		super(caption);

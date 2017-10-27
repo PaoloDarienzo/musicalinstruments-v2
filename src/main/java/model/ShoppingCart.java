@@ -224,7 +224,6 @@ public class ShoppingCart {
     	
     }
     
-    
     /**
      * Returns the total price of the items in the shopping cart
      * @return the total price of the items in the shopping cart

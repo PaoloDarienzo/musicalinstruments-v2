@@ -25,9 +25,18 @@ import com.vaadin.ui.themes.ValoTheme;
 
 import controller.Authentication;
 
+/**
+ * This class creates the login view.
+ * @author Paolo D'Arienzo
+ * @version 2.0
+ *
+ */
 @SuppressWarnings("serial")
 public class LoginView extends VerticalLayout{
 
+	/**
+	 * Constructor of the login view.
+	 */
     public LoginView() {
     	
         setSizeFull();
@@ -62,6 +71,10 @@ public class LoginView extends VerticalLayout{
         
     }
 
+    /**
+     * Constructs the login view that will contains the login form
+     * @return the login view
+     */
     private Component buildLoginForm() {
         final VerticalLayout loginPanel = new VerticalLayout();
         loginPanel.setSizeUndefined();
@@ -75,6 +88,10 @@ public class LoginView extends VerticalLayout{
         return loginPanel;
     }
 
+    /**
+     * Constructs the authentication form, composed by the userID and password fields
+     * @return the authentication form
+     */
     private Component buildAuthentication() {
     	
     	VerticalLayout authentication = new VerticalLayout();
@@ -147,6 +164,10 @@ public class LoginView extends VerticalLayout{
         return authentication;
     }
 
+    /**
+     * Constructs the labels of the login form
+     * @return the labels of the login form
+     */
     private Component buildLabels() {
         CssLayout labels = new CssLayout();
         labels.addStyleName("labels");
@@ -165,12 +186,18 @@ public class LoginView extends VerticalLayout{
         return labels;
     }
     
+    /**
+     * Navigates to the main view
+     */
     private void goToMainView() {
 		Page.getCurrent().setTitle("zumzum.it");
     	UI.getCurrent().setContent(new MainView());
         removeStyleName("loginview");
 	}
 	
+    /**
+     * Navigates to the register view
+     */
 	private void goToRegisterView() {
 		Page.getCurrent().setTitle("zumzum.it - register");
     	UI.getCurrent().setContent(new RegisterView());

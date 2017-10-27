@@ -14,7 +14,7 @@ import model.User;
 /**
  * UserDAO class contains all the methods that interact with the database relatively to the user.
  * @author Paolo D'Arienzo
- * @version 2.0
+ * @version 1.6
  *
  */
 public class UserDAO {

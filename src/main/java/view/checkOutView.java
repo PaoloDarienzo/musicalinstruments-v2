@@ -29,6 +29,12 @@ import model.Payment;
 import model.ProductInCart;
 import model.User;
 
+/**
+ * This class creates the view of the checkout.
+ * @author Paolo D'Arienzo
+ * @version 2.0
+ *
+ */
 @SuppressWarnings("serial")
 public class checkOutView extends VerticalLayout implements View {
 
@@ -38,6 +44,9 @@ public class checkOutView extends VerticalLayout implements View {
 	private ComboBox<Payment> paymtMethod;
 	private ComboBox<DeliveryPoint> dlvPoint;
 	
+	/**
+	 * Constructor that creates the view of the checkout.
+	 */
 	public checkOutView() {
 		
 		Authentication localAuth = (Authentication) UI.getCurrent().getSession().getAttribute("AUTH");
@@ -77,11 +86,6 @@ public class checkOutView extends VerticalLayout implements View {
 			
 			confirmedPurchase.addClickListener(e -> {
 				
-				/*
-				 * private RadioButtonGroup<String> shippingMethod;
-	private ComboBox<Payment> paymtMethod;
-	private ComboBox<DeliveryPoint> dlvPoint;
-				 */
 				if(		shippingMethod.isEmpty() ||
 						paymtMethod.isEmpty() ||
 						dlvPoint.isEmpty()) {
@@ -103,6 +107,11 @@ public class checkOutView extends VerticalLayout implements View {
 		
 	}
 	
+	/**
+	 * Creates the grid for the cart
+	 * @param user is the user from whom take the cart
+	 * @return the grid containing the cart of the user
+	 */
 	private GridLayout gridCartCreation(User user) {
 		
 		int cols = 5;
@@ -166,6 +175,11 @@ public class checkOutView extends VerticalLayout implements View {
 		return gridCart;
 	}
 	
+	/**
+	 * Creates the form for proceeding to the checkout
+	 * @param user is the user from whom take the informations of delivery points and payment methods
+	 * @return the form for proceeding to the checkout
+	 */
 	private FormLayout formLayoutCreation(User user) {
 		FormLayout checkout = new FormLayout();
 		checkout.setSizeFull();
@@ -191,7 +205,10 @@ public class checkOutView extends VerticalLayout implements View {
 		return checkout;
 	}
 	
-
+	/**
+	 * Completes the purchase
+	 * @param localAuth where is stored the user; updated after the purchase
+	 */
 	private void goConfirmPurchase(Authentication localAuth) {
 		
 		User user = localAuth.getUser();

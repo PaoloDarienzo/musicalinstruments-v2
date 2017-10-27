@@ -11,16 +11,25 @@ import com.vaadin.ui.UI;
 import com.vaadin.ui.Window;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
-import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.themes.ValoTheme;
 
 import controller.Authentication;
 import model.Payment;
 import model.User;
 
+/**
+ * This class creates the pop-up window that manages the adding of a method payment.
+ * @author Paolo D'Arienzo
+ * @version 2.0
+ *
+ */
 @SuppressWarnings("serial")
 public class addPaymentWindow extends Window {
 	
+	/**
+	 * Extends the constructor of the window, adding the form used for adding the payment method.
+	 * @param caption is the caption string to pass to the constructor of the Window
+	 */
 	addPaymentWindow(String caption){
 		
 		super(caption);

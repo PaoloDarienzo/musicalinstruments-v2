@@ -23,6 +23,9 @@ import view.MainView;
  * <p>
  * The UI is initialized using {@link #init(VaadinRequest)}. This method is intended to be 
  * overridden to add component to the user interface and initialize non-component functionality.
+ * @author Paolo D'Arienzo
+ * @version 2.0
+ * 
  */
 @SuppressWarnings("serial")
 @Theme("mytheme")
@@ -64,6 +67,10 @@ public class MyUI extends UI {
         }
     }
     
+    /**
+     * Do the logout of the user;
+     * resets the user status in the session and reload the page, resulting in a redirect
+     */
     public void userLoggedOut() {
         // When the user logs out, current VaadinSession gets closed and the
         // page gets reloaded on the login screen. Do notice that this doesn't
@@ -73,11 +80,6 @@ public class MyUI extends UI {
     	UI.getCurrent().getSession().setAttribute("AUTH", localAuth);
         VaadinSession.getCurrent().close();
         Page.getCurrent().reload();
-    }
-    
-    @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
-    @VaadinServletConfiguration(ui = MyUI.class, productionMode = false)
-    public static class MyUIServlet extends VaadinServlet {
     }
     
     /**
@@ -104,4 +106,10 @@ public class MyUI extends UI {
         }  
         return ip;  
     }
+    
+    @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
+    @VaadinServletConfiguration(ui = MyUI.class, productionMode = false)
+    public static class MyUIServlet extends VaadinServlet {
+    }
+    
 }

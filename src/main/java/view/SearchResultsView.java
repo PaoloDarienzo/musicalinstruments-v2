@@ -72,10 +72,7 @@ public class SearchResultsView extends VerticalLayout implements View {
         	}
         }
         
-        Boolean searchStringIsVoid = true;
-        if(!search.isEmpty()) {
-        	searchStringIsVoid = false;
-        }
+        Boolean searchStringIsVoid = (search.isEmpty()) ? true : false;
         
         List<Product> queryResults = new ArrayList<Product>();
         

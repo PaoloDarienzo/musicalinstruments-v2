@@ -19,6 +19,12 @@ import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.themes.ValoTheme;
 
+/**
+ * this class creates the homepage, where the user can proceed to the search.
+ * @author Paolo D'Arienzo
+ * @version 2.0
+ *
+ */
 @SuppressWarnings("serial")
 public class HomeView extends VerticalLayout implements View {
 
@@ -30,12 +36,10 @@ public class HomeView extends VerticalLayout implements View {
     private ComboBox<String> usedStatusToSearch;
     private ComboBox<String> productTypeToSearch;
 	
+    /**
+     * Constructor of the homepage view, where there are all the filters for the search.
+     */
 	public HomeView(){
-		
-		/*
-		Authentication localAuth = (Authentication) UI.getCurrent().getSession().getAttribute("AUTH");
-		User user = localAuth.getUser();
-		*/
 		
 		VerticalLayout searchPanelLayout = new VerticalLayout();
     	        

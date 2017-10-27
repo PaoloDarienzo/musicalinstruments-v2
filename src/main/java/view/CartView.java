@@ -19,11 +19,20 @@ import controller.Authentication;
 import model.ProductInCart;
 import model.User;
 
+/**
+ * This class creates the view of the cart of the user.
+ * @author Paolo D'Arienzo
+ * @version 2.0
+ *
+ */
 @SuppressWarnings("serial")
 public class CartView extends VerticalLayout implements View {
 	
 	public static final String NAME = "cart";
 	
+	/**
+	 * Constructor that creates the cart of the user.
+	 */
 	public CartView(){
 		
 		Authentication localAuth = (Authentication) UI.getCurrent().getSession().getAttribute("AUTH");
