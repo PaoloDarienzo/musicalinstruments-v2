@@ -6,6 +6,7 @@ import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
+import com.vaadin.ui.TextArea;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Button.ClickEvent;
@@ -80,7 +81,11 @@ public class CartView extends VerticalLayout implements View {
 				java.util.Formatter unitaryPrice = new java.util.Formatter();
 				java.util.Formatter productsPrice = new java.util.Formatter();
 				
-				gridCart.addComponent(new Label(productInCart.getProduct().getNome()));
+				TextArea nameText = new TextArea();
+				nameText.setWidth(100, Unit.PERCENTAGE);
+				nameText.setValue(productInCart.getProduct().getNome());
+				nameText.setReadOnly(true);
+				gridCart.addComponent(nameText);
 				
 				gridCart.addComponent(new Label(unitaryPrice.format("%.2f", productInCart.getProduct().getPrezzo()).toString() + " €"));
 				gridCart.addComponent(new Label(String.valueOf(productInCart.getNumeroProdotto())));
