@@ -15,12 +15,21 @@ import model.DeliveryPoint;
 import model.Payment;
 import model.User;
 
+/**
+ * This class creates the lists of payment methods and delivery points of the logged user.
+ * @author Paolo D'Arienzo
+ * @version 2.0
+ *
+ */
 @SuppressWarnings("serial")
-public class userListsLayout extends VerticalLayout {
+public class UserListsLayout extends VerticalLayout {
 	
 	private User user;
 
-	userListsLayout(){
+	/**
+	 * Constructor of the layout of the lists of the user (payment methods and delivery points).
+	 */
+	UserListsLayout(){
 		
 		Authentication localAuth = (Authentication) UI.getCurrent().getSession().getAttribute("AUTH");
 		this.user = localAuth.getUser();
@@ -32,6 +41,9 @@ public class userListsLayout extends VerticalLayout {
 		
 	}
 	
+	/**
+	 * Creates the list of the payment methods of the user
+	 */
 	private void paymentMethods(){
 		
 		Button addBtn = new Button("Add payment method");
@@ -58,7 +70,7 @@ public class userListsLayout extends VerticalLayout {
             @Override
             public void buttonClick(final ClickEvent event) {
             	
-                Window subWindow = new addPaymentWindow("Add payment");
+                Window subWindow = new AddPaymentWindow("Add payment");
 
                 // Center it in the browser window
                 subWindow.center();
@@ -71,6 +83,9 @@ public class userListsLayout extends VerticalLayout {
 		
 	}
 	
+	/**
+	 * Creates the list of the delivery points of the user
+	 */
 	private void deliveryPoints(){
 		
 		Button addBtn = new Button("Add delivery point");
@@ -99,7 +114,7 @@ public class userListsLayout extends VerticalLayout {
             @Override
             public void buttonClick(final ClickEvent event) {
             	
-                Window subWindow = new addDlvPointWindow("Add delivery point");
+                Window subWindow = new AddDlvPointWindow("Add delivery point");
 
                 // Center it in the browser window
                 subWindow.center();

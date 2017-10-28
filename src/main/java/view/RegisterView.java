@@ -29,9 +29,20 @@ import model.Encode;
 import model.TipoCliente;
 import model.User;
 
+/**
+ * This class creates the view for the registration.
+ * @author Paolo D'Arienzo
+ * @version 2.0
+ *
+ */
 @SuppressWarnings("serial")
 public class RegisterView extends VerticalLayout {
 
+	/**
+	 * Constructor of the register layout; 
+	 * creates the form, extrapolate the values inserted in the fields, proceeds to the registration
+	 * and then automatically log-in the user.
+	 */
 	public RegisterView() {
 		
 		HorizontalLayout logo = new HorizontalLayout();
@@ -50,8 +61,6 @@ public class RegisterView extends VerticalLayout {
         
         Panel mainContent = new Panel("Registration Form");
         mainContent.setSizeUndefined();
-        
-        //VerticalLayout mainContent = new VerticalLayout();
         
         FormLayout loginForm = new FormLayout();
         
@@ -103,15 +112,12 @@ public class RegisterView extends VerticalLayout {
         loginForm.addComponents(mail, username, psw, pswRepeated, 
         		name, surname, fiscalCode, telNum, cellNum, city, userType);
         
-        //mainContent.addComponent(loginForm);
-        
         loginForm.setSizeUndefined(); // Shrink to fit
         loginForm.setMargin(true);
         mainContent.setContent(loginForm);
         
         Label infoLabel1 = new Label("<i>Fields marked with *</i>", ContentMode.HTML);
         Label infoLabel2 = new Label("<i>are not required.</i>", ContentMode.HTML);
-        //mainContent.addComponent(infoLabel);
         loginForm.addComponents(infoLabel1, infoLabel2);
         
         HorizontalLayout btns = new HorizontalLayout();
@@ -122,7 +128,6 @@ public class RegisterView extends VerticalLayout {
         btns.setComponentAlignment(cancel, Alignment.MIDDLE_LEFT);
         btns.setComponentAlignment(cancel, Alignment.MIDDLE_RIGHT);
         
-        //mainContent.addComponent(btns);
         loginForm.addComponent(btns);
         
         addComponent(mainContent);
@@ -173,19 +178,6 @@ public class RegisterView extends VerticalLayout {
             		}
             	}
             	
-            	//TODO
-            	System.out.println("mail: " + mail.getValue());
-            	System.out.println("username: " + username.getValue());
-            	System.out.println("psw: " + psw.getValue());
-            	System.out.println("psw repeated: " + pswRepeated.getValue());
-            	System.out.println("name: " + name.getValue());
-            	System.out.println("surname: " + surname.getValue());
-            	System.out.println("cf: " + fiscalCode.getValue());
-            	System.out.println("tel: " + telNum.getValue());
-            	System.out.println("cell: " + cellNum.getValue());
-            	System.out.println("city: " + city.getValue());
-            	System.out.println("usertype: " + userType.getValue());
-            	
             	User utente = null;
             	
             	TipoCliente userTypeEnum;
@@ -223,12 +215,20 @@ public class RegisterView extends VerticalLayout {
         
 	}
 
+	/**
+	 * Redirects to the login view
+	 */
 	protected void goToLoginView() {
 		Page.getCurrent().setTitle("zumzum.it - login");
         UI.getCurrent().setContent(new LoginView());
         addStyleName("loginview");	
 	}
 	
+	/**
+	 * Redirects to the homepage after authenticating the user; the user has already registered
+	 * @param mail of the user
+	 * @param psw of the user
+	 */
 	protected void goToMainView(String mail, String psw) {
 		Authentication localAuth = (Authentication) UI.getCurrent().getSession().getAttribute("AUTH");
 		if(localAuth.authenticate(mail, psw)) {

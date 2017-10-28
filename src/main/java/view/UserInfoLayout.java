@@ -7,10 +7,19 @@ import com.vaadin.ui.VerticalLayout;
 import controller.Authentication;
 import model.User;
 
+/**
+ * This class creates the layout containing the informations of the logged user.
+ * @author Paolo D'Arienzo
+ * @version 2.0
+ *
+ */
 @SuppressWarnings("serial")
-public class userInfoLayout extends VerticalLayout {
+public class UserInfoLayout extends VerticalLayout {
 	
-	userInfoLayout(){
+	/**
+	 * Constructor of the user's infos layout
+	 */
+	UserInfoLayout(){
 		
 		Authentication localAuth = (Authentication) UI.getCurrent().getSession().getAttribute("AUTH");
 		User user = localAuth.getUser();

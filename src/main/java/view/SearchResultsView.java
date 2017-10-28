@@ -20,11 +20,26 @@ import controller.Authentication;
 import model.Product;
 import model.User;
 
+/**
+ * This class shows the results of the search requested by the user.
+ * @author Paolo D'Arienzo
+ * @version 2.0
+ *
+ */
 @SuppressWarnings("serial")
 public class SearchResultsView extends VerticalLayout implements View {
 	
 	public static final String NAME = "results";
 	
+	/**
+	 * Constructor of the view that will show the results of the search;
+	 * performs the search and creates the view of the results.
+	 * @param search contains the keywords inserted in the search bar
+	 * @param brandToSearch contains the filter for the brand
+	 * @param instrumentTypeToSearch contains the filter for the instrument type
+	 * @param usedStatusToSearch contains the filter for the used status
+	 * @param productTypeToSearch contains the filter for the type of product
+	 */
 	SearchResultsView(String search, String brandToSearch, String instrumentTypeToSearch,
 			String usedStatusToSearch, String productTypeToSearch){
 		
@@ -78,7 +93,9 @@ public class SearchResultsView extends VerticalLayout implements View {
         
         try {
         	queryResults = dao.QueriesDAO.getProducts(searchStringIsVoid, search, brandToSearch, instrumentTypeToSearch, usedStatusToSearch, productTypeToSearch);
-		} catch (UnknownHostException e) {
+		} catch (UnknownHostException e) { 
+			//If an error occurs with the determination of the IP address related to one of the
+			//products in the cart of the user
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -186,7 +203,8 @@ public class SearchResultsView extends VerticalLayout implements View {
 				applicableDiscount.setStyleName(ValoTheme.LABEL_BOLD);
 				productGrid.addComponent(applicableDiscount, 0, rows - 2);
 				
-				String discountValueToString = String.valueOf(product.getSconto()) + "%";
+				String discountValueToString = 
+						String.valueOf(product.getSconto()) + "% - PEZZI MINIMI: " + String.valueOf(product.getNumeroPezziMinimo());
 				Label applicableDiscountValue = new Label(discountValueToString);
 				productGrid.addComponent(applicableDiscountValue, 1, rows - 2);
 				

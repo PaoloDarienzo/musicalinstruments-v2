@@ -24,13 +24,13 @@ import model.User;
  *
  */
 @SuppressWarnings("serial")
-public class addDlvPointWindow extends Window {
+public class AddDlvPointWindow extends Window {
 
 	/**
 	 * Extends the constructor of the window, adding the form used for adding the delivery point.
 	 * @param caption is the caption string to pass to the constructor of the Window
 	 */
-	addDlvPointWindow(String caption){
+	AddDlvPointWindow(String caption){
 		
 		super(caption);
 		

@@ -24,13 +24,13 @@ import model.User;
  *
  */
 @SuppressWarnings("serial")
-public class addPaymentWindow extends Window {
+public class AddPaymentWindow extends Window {
 	
 	/**
 	 * Extends the constructor of the window, adding the form used for adding the payment method.
 	 * @param caption is the caption string to pass to the constructor of the Window
 	 */
-	addPaymentWindow(String caption){
+	AddPaymentWindow(String caption){
 		
 		super(caption);
 		

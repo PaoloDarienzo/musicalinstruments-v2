@@ -11,9 +11,20 @@ import com.vaadin.ui.VerticalLayout;
 
 import controller.Authentication;
 
+/**
+ * This class creates the structure of the website (<i>HorizontalSplitPanel</i>), 
+ * initializating the vertical menu and the navigator, 
+ * that is related to the second component of the split panel.
+ * @author Paolo D'Arienzo
+ * @version 2.0
+ *
+ */
 @SuppressWarnings("serial")
 public class MainView extends VerticalLayout implements View{
 
+	/**
+	 * Constructor of the main view; creates the menu and the navigator.
+	 */
     public MainView() {
     	
     	Authentication localAuth = (Authentication) UI.getCurrent().getSession().getAttribute("AUTH");

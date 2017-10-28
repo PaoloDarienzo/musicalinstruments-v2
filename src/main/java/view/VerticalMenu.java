@@ -16,24 +16,41 @@ import com.vaadin.ui.themes.ValoTheme;
 
 import controller.MyUI;
 
+/**
+ * This class creates the vertical menu on the left of the page.
+ * @author Paolo D'Arienzo
+ * @version 2.0
+ *
+ */
 @SuppressWarnings("serial")
 public class VerticalMenu extends VerticalLayout{
 	
-    //initialize root & other components
-    {
+	/**
+	 * Constructor of the vertical menu; initialize root and other components.
+	 */
+    public VerticalMenu() {
         initRoot();
         initComponents();
     }
     
+    /**
+     * Sets the style
+     */
     private void initRoot(){
         setStyleName("vertical-menu");
     }
     
+    /**
+     * Initializes all the components
+     */
     private void initComponents(){
     	initLogo();
         initButtons();
     }
     
+    /**
+     * Initializes the logo
+     */
     private void initLogo() {
     	
     	HorizontalLayout logo = new HorizontalLayout();
@@ -51,6 +68,9 @@ public class VerticalMenu extends VerticalLayout{
         
     }
     
+    /**
+     * Initializes all the menu buttons
+     */
     private void initButtons(){
     	
     	Button homeBtn = new Button("Home");
@@ -81,6 +101,9 @@ public class VerticalMenu extends VerticalLayout{
         
     }
     
+    /**
+     * Does the logout of the user
+     */
     private void doLogout() {
 		
 		Notification notification = new Notification("Redirect to login page...");
@@ -93,15 +116,23 @@ public class VerticalMenu extends VerticalLayout{
 		
 	}
     
+    /**
+     * Navigates to the homepage view
+     */
     private void goToHomeView() {
-    	UI.getCurrent().getNavigator().navigateTo(HomeView.NAME);
-		
+    	UI.getCurrent().getNavigator().navigateTo(HomeView.NAME);	
 	}
     
+    /**
+     * Navigates to the profile view
+     */
     private void goToProfileView() {
     	UI.getCurrent().getNavigator().navigateTo(ProfileView.NAME);
 	}
 
+    /**
+     * Navigates to the cart view
+     */
 	private void goToCartView() {
     	UI.getCurrent().getNavigator().navigateTo(CartView.NAME);
 	}
