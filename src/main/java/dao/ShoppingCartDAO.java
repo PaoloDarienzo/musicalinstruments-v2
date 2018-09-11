@@ -23,7 +23,7 @@ public class ShoppingCartDAO {
 	
     private final static String JDBC_URL = "jdbc:postgresql://localhost:5432/strumenti_database";
     private final static String JDBC_USERNAME = "postgres";
-    private final static String JDBC_PASSWORD = "effe";
+    private final static String JDBC_PASSWORD = "password";
     
     private final static String NOME_TABELLA = "aggiunto";
     

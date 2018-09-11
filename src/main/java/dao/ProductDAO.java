@@ -28,7 +28,7 @@ public class ProductDAO {
 	
     private final static String JDBC_URL = "jdbc:postgresql://localhost:5432/strumenti_database";
     private final static String JDBC_USERNAME = "postgres";
-    private final static String JDBC_PASSWORD = "effe";
+    private final static String JDBC_PASSWORD = "password";
     
     /**
      * Adds the product in the database
